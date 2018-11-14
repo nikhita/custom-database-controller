@@ -17,8 +17,9 @@ go get github.com/nikhita/custom-database-controller
 ## Prerequisites
 
 Custom Resources support `/status` and `/scale` subresources as an
-[alpha feature](https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/#subresources) in v1.10. You will need a Kubernetes cluster with version 1.10.
-Enable this feature using the `CustomResourceSubresources` feature gate on the [kube-apiserver](https://kubernetes.io/docs/admin/kube-apiserver):
+[alpha feature](https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/#subresources) in v1.10. You will need a Kubernetes cluster with version of at least 1.10.
+Enable this feature using the `CustomResourceSubresources` feature gate on the [kube-apiserver](https://kubernetes.io/docs/admin/kube-apiserver) for v1.10.
+This feature is enabled by default for versions >v1.10.
 
 ```sh
 --feature-gates=CustomResourceSubresources=true
@@ -31,10 +32,10 @@ Enable this feature using the `CustomResourceSubresources` feature gate on the [
 $ go run *.go -kubeconfig=$HOME/.kube/config
 
 # create a CustomResourceDefinition
-$ kubectl create -f artifacts/examples/databases-crd.yaml
+$ kubectl create -f artifacts/databases-crd.yaml
 
 # create a custom resource of type Database
-$ kubectl create -f artifacts/examples/mysql-database.yaml
+$ kubectl create -f artifacts/mysql-database.yaml
 
 # check deployments created through the Databse custom resource
 $ kubectl get deployments
